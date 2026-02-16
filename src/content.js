@@ -1,161 +1,199 @@
 // ============================================================
-// 📝 תוכן מעודכן מ-raw-content.txt + חידונים
+// 📝 תוכן למתחילים מוחלטים - בלי להניח שום ידע
 // ============================================================
 
 export const PAGES = [
   {
-    title: 'חלק 1 - מה זה Hybrid בכלל?',
-    text: `ב-Next.js אתה לא חייב לבחור "רק SPA" או "רק SSR".
-אתה יכול לבנות אתר שבו:
+    title: 'התחלה - מה קורה כשנכנסים לאתר?',
+    text: `בוא נתחיל מההתחלה. אין צורך לדעת כלום.
 
-דפים מסוימים נטענים מהשרת עם HTML מוכן (SSR) = טוב ל-SEO ומהירות טעינה ראשונית.
+כשאתה נכנס לאתר (למשל google.com) יש שני "שחקנים":
+1. השרת — מחשב מרוחק ששומר את האתר. הוא שייך לחברה שמארחת את האתר.
+2. הדפדפן שלך — Chrome, Edge, Safari. רץ במחשב או בטלפון שלך.
 
-חלקים אינטראקטיביים עובדים כמו אפליקציה בתוך הדפדפן (SPA/Client) = חוויה חלקה, בלי רענונים מיותרים.
+השאלה הגדולה: איפה נבנה הדף שאתה רואה על המסך?
 
-במילים פשוטות:
-השרת עושה את העבודה הכבדה בהתחלה, והדפדפן ממשיך את החוויה כמו אפליקציה.`
+אפשרות א': השרת בונה את הדף ושולח לך מוכן. כמו מסעדה שמוציאה צלחת מוגמרת.
+אפשרות ב': השרת שולח "חומרי גלם" והדפדפן שלך בונה את הדף. כמו שמביאים לך מצרכים ואתה מבשל.
+
+Next.js מאפשר לערבב את שתי האפשרויות — וזה נקרא Hybrid.`
+  },
+  {
+    title: 'מה זה Hybrid? (בשפה פשוטה)',
+    text: `Hybrid = שילוב חכם.
+
+במקום לבחור "הכל מהשרת" או "הכל מהמחשב שלך" — מחליטים לכל חלק באתר בנפרד.
+
+חלקים שצריכים להופיע מהר + שגוגל ימצא (דף בית, דף "אודות") → השרת בונה ושולח מוכן.
+(למה גוגל? כי כשגוגל רואה תוכן מוכן, האתר מדורג יותר גבוה בחיפוש — זה נקרא SEO)
+
+חלקים שצריכים להגיב (כפתורים, טפסים, חיפוש חי) → המחשב שלך מריץ כמו אפליקציה. חלק, בלי רענון.
+(SPA = אתר שמרגיש כמו אפליקציה — אין טעינה מחדש)
+
+במילה אחת: השרת עושה את העבודה הכבדה בהתחלה. הדפדפן ממשיך את החוויה.`
   },
   {
     type: 'quiz',
     title: 'חידון 1',
-    learn: `SSR = השרת שולח HTML מוכן. SPA = הדפדפן מריץ כמו אפליקציה. Hybrid = שילוב של שניהם.`,
+    learn: `נזכור: השרת = מחשב מרוחק. הדפדפן = אצלך. Hybrid = ערבוב — כל חלק באתר מקבל את הדרך הנכונה לו.`,
     question: 'Hybrid ב-Next.js אומר ש...',
     options: {
-      א: 'אתה חייב לבחור: רק SPA או רק SSR',
-      ב: 'אתה יכול לערבב — דפים מ-Server וחלקים אינטראקטיביים כ-SPA',
-      ג: 'SSR תמיד יותר איטי מ-SPA',
-      ד: 'אין קשר ל-SEO'
+      א: 'חייבים לבחור: או הכל מהשרת או הכל מהמחשב שלי',
+      ב: 'אפשר לערבב — חלק מהדף מהשרת, חלק רץ אצלך במחשב',
+      ג: 'השרת תמיד איטי',
+      ד: 'גוגל לא רואה את האתר'
     },
     correct: 'ב',
-    explanation: `מצוין! Hybrid = שילוב. דפים נטענים מהשרת (מהיר + SEO), ואז הדפדפן ממשיך כמו אפליקציה חלקה.`
+    explanation: `נכון! Hybrid = ערבוב. לא "או-או" אלא "גם וגם". כל חלק באתר מקבל את הדרך שמתאימה לו.`
   },
   {
-    title: 'חלק 2 - Server Components מול Client Components',
-    text: `הטריק הגדול של Next.js.
+    title: 'מה זה קומפוננטה? (חלק מהדף)',
+    text: `קומפוננטה = חתיכה קטנה של הדף. כמו לבנה.
 
-ב-Next.js (App Router) ברירת המחדל היא Server Components:
+דוגמאות: כפתור, כרטיס של פרויקט, טופס "צור קשר", רשימת פריטים.
 
-• רץ בשרת
-• מביא דאטה בקלות
-• שולח פחות JavaScript לדפדפן (יותר מהיר)
+בכל קומפוננטה שואלים: "האם יש כאן משהו שמגיב? כפתור? שדה שזוכר מה הקלדתי?"
 
-וכשצריך אינטראקטיביות (כפתורים עם state, טפסים חכמים, אנימציות, useEffect וכו') — משתמשים ב-Client Components עם "use client".
-
-זה לב ה-Hybrid.`
+אם לא — היא רק מציגה מידע. → Server Component (רץ בשרת)
+אם כן — יש אינטראקטיביות. → Client Component (רץ בדפדפן שלך)`
   },
   {
-    title: 'חלק 3 - איך זה ייראה באתר פורטפוליו שלך',
-    text: `באתר שלך:
+    title: 'Server לעומת Client — ההבדל בפשטות',
+    text: `Server Component (רץ בשרת):
+הקוד רץ במחשב של החברה שמארחת את האתר.
+• בונה את הדף ושולח HTML מוכן
+• מהיר! פחות עומס על המחשב שלך
+• מתאים: טקסט, רשימות, כרטיסים — כל מה שפשוט מציג
 
-• דף Home / Projects: רובו יהיה Server (מהיר + SEO)
-• כרטיס פרויקט: יכול להיות Server
-• חיפוש/פילטר/סורט מיידי: Client (כמו SPA)
-• טופס יצירת קשר עם ולידציה/Toast: Client
-• אם בעתיד תוסיף Dashboard / Admin: יכול להיות SSR או שילוב עם פעולות שרת.`
+Client Component (רץ אצלך בדפדפן):
+הקוד רץ במחשב שלך.
+• צריך כשאתה לוחץ, מקליד, מפעיל משהו
+• מתאים: כפתורים, טפסים, חיפוש חי
+
+בדיקת אצבע: יש לחיצה? יש שדה שמזכיר מה הקלדת? → Client.
+רק הצגה? → Server.`
+  },
+  {
+    title: 'דוגמה — אתר פורטפוליו',
+    text: `בוא נראה איך זה נראה באתר אמיתי:
+
+דף הבית + רשימת הפרויקטים → Server (רק מציג. מהיר. גוגל אוהב)
+
+כפתור "חיפוש" או "סנן" → Client (כי כשאתה מקליד, המסך משתנה)
+
+טופס "צור קשר" → Client (יש שדות, לחיצה על "שלח")
+
+הכרטיס של כל פרויקט → Server (רק מציג תמונה + טקסט)`
   },
   {
     type: 'quiz',
     title: 'חידון 2',
-    learn: `המשפט לזכור: Server = להצגת מידע. Client = לאינטראקטיביות.`,
-    question: 'מה ההבדל בין Server Component ל-Client Component?',
+    learn: `שלבי החשיבה: 1) מה החלק עושה? 2) האם יש לחיצה או קלט? 3) לא → Server. כן → Client.`,
+    question: 'קומפוננטה שמציגה רשימת פרויקטים — בלי כפתורים, בלי חיפוש. היא:',
     options: {
-      א: 'Server = להצגת מידע מהר. Client = לאינטראקטיביות וחוויית משתמש',
-      ב: 'אין הבדל',
-      ג: 'Client תמיד מהיר יותר',
-      ד: 'Server רק ל-API'
+      א: 'Server (רק מציגה)',
+      ב: 'Client (יש אינטראקטיביות)',
+      ג: 'שניהם',
+      ד: 'תלוי באינטרנט'
     },
     correct: 'א',
-    explanation: `נכון! Server Component להצגת מידע מהר וביעילות. Client Component לאינטראקטיביות ולחוויית משתמש.`
+    explanation: `נכון! היא רק מציגה. אין "זיכרון", אין לחיצות — לכן Server מתאים. מהיר ופשוט.`
   },
   {
-    title: 'המשפט המדויק לזכור',
-    text: `Server Component = להצגת מידע מהר וביעילות
+    title: 'המשפט לזכור לתמיד',
+    text: `Server Component = להציג מידע מהר
 
-Client Component = לאינטראקטיביות וחוויית משתמש`
+Client Component = לאינטראקטיביות — כשהמשתמש עושה משהו (לוחץ, מקליד)
+
+אם תתבלבל — תשאל: "האם המשתמש עושה כאן משהו?"`
   },
   {
-    title: 'משהו חשוב מאוד שתדע',
-    text: `חברות גדולות (Netflix, Facebook וכו'):
-לא משתמשות רק ב-Client.
-הן משתמשות בדיוק בגישה הזו: Hybrid = Server + Client ביחד.
+    title: 'Netflix, Facebook — והכלל הכי חשוב',
+    text: `חברות ענק (Netflix, Facebook) לא עושות "הכל ב-Client".
+הן עושות Hybrid: כמה שיותר Server, Client רק איפה שצריך.
 
-• כמה שיותר Server (ביצועים)
-• Client רק איפה שצריך (אינטראקטיביות)`
+למה? כי Server = פחות קוד שרץ אצלך = מהיר יותר.
+Client = רק כשבאמת צריך שהמשתמש יגיב.
+
+הכלל במילה אחת:
+רק מציגה מידע? → Server
+יש state (זיכרון) / לחיצות / טפסים? → Client`
   },
   {
-    title: 'הכלל הכי חשוב ב-Hybrid',
-    text: `אם הקומפוננטה:
+    title: 'מה זה state ו-hooks?',
+    text: `כדי שתבין מתי צריך Client — שני מונחים קצרים:
 
-רק מציגה מידע → Server
+state = זיכרון. למשל: "כמה פעמים לחצתי על הכפתור?" או "מה הקלדתי בשדה החיפוש?"
+אם יש זיכרון — צריך Client.
 
-יש בה state / events / hooks → Client
+hooks = כלים של React. useState שומר ערך. useEffect מריץ משהו אחרי פעולה.
+אם משתמשים בהם — צריך Client.
 
-זה כל הסיפור.`
+event = אירוע. למשל: לחיצה (onClick), הקלדה (onChange).
+אם יש אירועים — צריך Client.`
   },
   {
     type: 'quiz',
     title: 'חידון 3',
-    learn: `state = זיכרון (למשל "כמה פעמים לחצתי"). events = לחיצות. hooks = useState, useEffect. אם אחד מהם → Client.`,
-    question: 'מתי צריך להוסיף "use client" לקומפוננטה?',
+    learn: `"use client" = אומר ל-Next.js: הקומפוננטה הזו צריכה לרוץ בדפדפן כי יש בה אינטראקטיביות.`,
+    question: 'מתי צריך לכתוב "use client" בראש הקובץ?',
     options: {
-      א: 'תמיד, בכל קומפוננטה',
-      ב: 'רק כשיש useState, useEffect, onClick או אינטראקטיביות',
-      ג: 'רק בדפים ראשיים',
+      א: 'תמיד, בכל קובץ',
+      ב: 'רק כשיש useState, onClick, טפסים או משהו שמגיב',
+      ג: 'רק בדף הראשי',
       ד: 'רק כשיש טופס'
     },
     correct: 'ב',
-    explanation: `בדיוק! "use client" נדרש כשאתה משתמש ב-hooks (useState, useEffect) או באירועים (onClick). בלי אלה — השאר Server.`
+    explanation: `בדיוק! "use client" אומר: "הקומפוננטה הזו צריכה לרוץ בדפדפן". בלי זה — Next.js מניח שהיא Server.`
   },
   {
     title: 'שלב 1 – סיכום',
-    text: `חלק 1: Hybrid = שילוב Server + Client
+    text: `מה למדנו:
 
-חלק 2: Server כברירת מחדל ב-Next.js
-
-חלק 3: Client רק כשצריך אינטראקטיביות`
+• Hybrid = שילוב חכם בין Server ל-Client
+• Server = להצגה (מהיר, טוב לגוגל)
+• Client = לאינטראקטיביות (כפתורים, טפסים, חיפוש)
+• ב-Next.js — ברירת מחדל היא Server. רק כשצריך — כותבים "use client".`
   },
   {
-    title: 'שלב 2 - יצירת פרויקט Next.js',
-    text: `יוצרים פרויקט חדש:
+    title: 'שלב 2 - איך ליצור פרויקט',
+    text: `פותחים טרמינל (שורת פקודה) ומקלידים:
 npx create-next-app@latest my-portfolio
 
-במהלך ההתקנה בחר:
+במהלך ההתקנה עונים:
 • TypeScript → Yes
 • App Router → Yes
 • ESLint → Yes
-• Tailwind → Yes (מומלץ)
+• Tailwind → Yes
 • src folder → Yes
 • import alias → Yes
 
-אחרי התקנה:
+אחרי שזה נגמר:
 cd my-portfolio
 npm run dev
 
-ותפתח: http://localhost:3000`
+ובדפדפן פותחים: http://localhost:3000
+רואים את האתר שרץ!`
   },
   {
-    title: 'מבנה התיקיות - App Router',
-    text: `בתוך הפרויקט תראה:
+    title: 'מבנה התיקיות — איפה מה נמצא?',
+    text: `בתוך הפרויקט יש תיקייה בשם app. זה הלב של האתר.
 
-src/app/
-  layout.tsx
-  page.tsx
-  globals.css
+מה יש שם?
+• page.tsx — הדף הראשי (כתובת: /)
+• layout.tsx — התבנית המשותפת (כותרת, תפריט, פוטר)
 
-מה כל דבר?
-app/ = הלב של האתר
-page.tsx = הדף הראשי /
+אם יוצרים תיקייה: app/contact/
+ובתוכה קובץ page.tsx
+— נוצר דף חדש בכתובת: /contact
 
-אם תיצור: app/projects/page.tsx — יהיה דף: /projects
-כל תיקייה = Route.
-
-layout.tsx = ה-Layout הכללי: Header, Footer, Navigation. כל הדפים נכנסים בתוכו.`
+כל תיקייה = כתובת (Route) באתר.`
   },
   {
     type: 'quiz',
     title: 'חידון 4',
-    learn: `כל תיקייה ב-app = Route. app/about/page.tsx → הכתובת /about`,
-    question: 'אם אני יוצר app/about/page.tsx — מה יהיה ה-URL?',
+    learn: `הכלל: שם התיקייה = הכתובת. app/about/page.tsx → הכתובת תהיה /about`,
+    question: 'יצרת את הקובץ app/about/page.tsx. מה תהיה הכתובת בדפדפן?',
     options: {
       א: '/about',
       ב: '/page/about',
@@ -163,166 +201,134 @@ layout.tsx = ה-Layout הכללי: Header, Footer, Navigation. כל הדפים �
       ד: 'about.localhost:3000'
     },
     correct: 'א',
-    explanation: `נכון! כל תיקייה ב-app יוצרת Route. app/about/page.tsx = הכתובת /about`
+    explanation: `נכון! שם התיקייה (about) הופך לכתובת. פשוט.`
   },
   {
-    title: 'איפה נכנס ה-Hybrid?',
-    text: `חשוב מאוד: ב-App Router כל קומפוננטה היא Server כברירת מחדל.
+    title: 'איך זה נראה בקוד?',
+    text: `קומפוננטה רגילה (בלי "use client") = Server:
+הקוד רץ בשרת. מהיר.
 
-לדוגמה:
-export default function Page() {
-  return <h1>Hello</h1>
-}
-זה Server Component.
+קומפוננטה עם "use client" בראש = Client:
+הקוד רץ בדפדפן שלך.
+צריך את זה כשיש useState (זיכרון) או onClick (לחיצה).
 
-אם אתה רוצה Client:
-"use client";
-import { useState } from "react";
-export default function Counter() {
-  const [count, setCount] = useState(0);
-  return <button onClick={() => setCount(count + 1)}>{count}</button>
-}
-
-רק אם יש "use client" — זה רץ בדפדפן.`
+רק המילה "use client" בראש הקובץ — זה מה שמבדיל.`
   },
   {
-    title: 'דוגמה אמיתית ל-Hybrid',
-    text: `Home page (Server):
-מביא פרויקטים מה-API
+    title: 'דוגמה אחת שמסכמת הכל',
+    text: `דף הבית (Server):
+מביא רשימת פרויקטים מהשרת ומוציא
 
-ProjectFilter (Client):
-חיפוש/פילטר בזמן אמת
+בתוכו — רכיב "חיפוש" (Client):
+אתה מקליד, והרשימה מסתננת בזמן אמת
 
-כלומר:
-Server Page
-↓
-בתוכה Client Component`
+כלומר: דף Server, ובפנים — קומפוננטה Client. זה Hybrid.`
   },
   {
-    title: 'כלל זהב (תשמור את זה)',
-    text: `אם אתה רואה:
+    title: 'כלל זהב',
+    text: `אם אתה רואה בקוד:
 
-useState / useEffect / event
+useState / useEffect / onClick (או event אחר)
 
 אז:
 
-"use client"
+כתוב "use client" בראש הקובץ
 
 וזה Client Component`
   },
   {
     type: 'quiz',
     title: 'חידון 5',
-    learn: `קומפוננטה בלי "use client" = Server (ברירת מחדל). עם "use client" = Client.`,
-    question: 'אם קומפוננטה בלי "use client" — היא Server או Client?',
+    learn: `ב-Next.js: אין "use client" = Server (ברירת מחדל). יש "use client" = Client.`,
+    question: 'קומפוננטה בלי "use client" בראש הקובץ — היא:',
     options: {
-      א: 'Client Component',
-      ב: 'Server Component',
+      א: 'Client',
+      ב: 'Server',
       ג: 'לא תקין',
-      ד: 'תלוי ב-React גרסה'
+      ד: 'תלוי בגרסת React'
     },
     correct: 'ב',
-    explanation: `מצוין! ב-Next.js App Router — ברירת המחדל תמיד Server. רק "use client" הופך ל-Client.`
+    explanation: `מצוין! ב-Next.js, אם לא כתבת "use client" — הקומפוננטה היא Server. רק "use client" הופך ל-Client.`
   },
   {
-    title: 'שלב 3 - SSR ו-Data Fetching',
-    text: `מצוין. עכשיו נכנסים ללב של ה-Hybrid.
-שלב 3 הוא מה שמבדיל אתר "רגיל" מאתר מקצועי.
+    title: 'שלב 3 - מה קורה כשמביאים נתונים?',
+    text: `עכשיו נכנסים ללב של Hybrid.
 
-מה זה SSR בפועל?
-SSR = Server Side Rendering
+מה זה fetch? = בקשה לנתונים. מהשרת או מ-API.
 
-המשתמש נכנס ל-URL
-השרת: מביא נתונים (API / Database), בונה HTML מוכן
-הדפדפן מקבל דף מוכן
+שתי דרכים:
+א) בשרת — השרת מביא נתונים, בונה דף, ושולח לך מוכן. (SSR)
+ב) בדפדפן — הדף נטען ריק, ואז הדפדפן מבקש נתונים. (SPA)
 
-יתרונות:
-• טעינה ראשונית מהירה
-• SEO מצוין
-• פחות JavaScript בדפדפן
-
-ב-Next.js זה קורה אוטומטית כשעושים fetch בתוך Server Component.`
+למה בשרת עדיף?
+• הדף נטען מהיר (כבר עם הנתונים)
+• גוגל רואה תוכן (SEO)
+• פחות עומס על המחשב שלך`
   },
   {
-    title: 'איך מביאים נתונים ב-Server Component',
-    text: `דוגמה:
-// app/projects/page.tsx
-async function getProjects() {
-  const res = await fetch("https://api.example.com/projects");
-  return res.json();
-}
-export default async function ProjectsPage() {
-  const projects = await getProjects();
-  return (
-    <div>
-      <h1>Projects</h1>
-      {projects.map((p) => <div key={p.id}>{p.title}</div>)}
-    </div>
-  );
-}
+    title: 'איך מביאים נתונים בשרת?',
+    text: `ב-Server Component (בלי "use client") אפשר פשוט לכתוב:
+async + fetch
 
-שימו לב:
-• הפונקציה של הדף היא async
-• אין "use client"
-• זה רץ בשרת
-• הדפדפן מקבל HTML מוכן
-זה SSR.`
+הפונקציה של הדף תהיה async.
+אין "use client".
+זה רץ בשרת.
+הדפדפן מקבל דף מוכן עם הנתונים.
+
+זה נקרא SSR — השרת מרנדר (בונה) את הדף.`
   },
   {
-    title: 'איך זה הופך ל-Hybrid - שלב 3',
-    text: `משלבים Client בתוך Server.
+    title: 'Hybrid אמיתי — שילוב של שניהם',
+    text: `דף (Server): מביא רשימת פרויקטים ב-fetch. מעביר לרכיב החיפוש.
 
-Server Page: מביא פרויקטים ב-fetch, מעביר ל-ProjectSearch
-Client Component (ProjectSearch): יש useState לחיפוש, מסנן את הרשימה
+רכיב החיפוש (Client): יש useState — זוכר מה הקלדת. מסנן את הרשימה.
 
 מה קורה?
-• הנתונים מגיעים מהשרת (SSR)
-• החיפוש עובד בדפדפן (SPA)
-• זה Hybrid אמיתי
+• הנתונים מגיעים מהשרת — הדף נטען מהר
+• החיפוש עובד בדפדפן — אתה מקליד והרשימה משתנה
 
-השרת עושה את fetch — הדף נטען מהר.
-הדפדפן מריץ את החיפוש — אינטראקטיבי.`
+זה Hybrid אמיתי.`
   },
   {
     type: 'quiz',
-    title: 'חידון 6 - שלב 3',
-    learn: `fetch בשרת = SSR. הדפדפן מקבל HTML מוכן. אין צורך ב-"use client" ל-fetch בשרת.`,
-    question: 'אם אני עושה fetch בתוך Server Component — זה SSR או SPA?',
+    title: 'חידון 6',
+    learn: `fetch בשרת = השרת מביא נתונים, בונה דף, שולח מוכן. אין צורך ב-"use client".`,
+    question: 'אם עושים fetch בתוך Server Component — זה רץ איפה?',
     options: {
-      א: 'SSR (השרת מביא נתונים ומרנדר)',
-      ב: 'SPA (הדפדפן מביא)',
+      א: 'בשרת (SSR)',
+      ב: 'בדפדפן (SPA)',
       ג: 'שניהם',
-      ד: 'לא תלוי'
+      ד: 'לא רלוונטי'
     },
     correct: 'א',
-    explanation: `נכון! fetch בתוך Server Component רץ בשרת. השרת מביא נתונים, בונה HTML, ושולח לדפדפן. זה SSR.`
+    explanation: `נכון! fetch בתוך Server Component רץ בשרת. השרת מביא, בונה, ושולח.`
   },
   {
     type: 'quiz',
     title: 'חידון 7',
-    learn: `Server Component יכול לעשות fetch בלי "use client". הנתונים מגיעים לפני שהדף נשלח.`,
+    learn: `ב-Server Component כותבים async + fetch. בלי "use client".`,
     question: 'האם צריך "use client" כדי לעשות fetch בשרת?',
     options: {
       א: 'כן, תמיד',
-      ב: 'לא — fetch בשרת עובד ב-Server Component בלי "use client"',
+      ב: 'לא — בשרת עובד בלי "use client"',
       ג: 'רק עם useEffect',
       ד: 'תלוי ב-API'
     },
     correct: 'ב',
-    explanation: `בדיוק! ב-Server Component אתה פשוט כותב async + fetch. אין צורך ב-"use client". ה-fetch רץ בשרת.`
+    explanation: `בדיוק! ב-Server Component פשוט כותבים async + fetch. ה-fetch רץ בשרת.`
   },
   {
     type: 'quiz',
     title: 'חידון 8',
-    learn: `להביא בשרת = מהיר (הדף נטען עם הנתונים), טוב ל-SEO, פחות JavaScript בדפדפן.`,
-    question: 'למה עדיף להביא רשימת פרויקטים בשרת ולא ב-Client?',
+    learn: `בשרת: מהיר, גוגל רואה, פחות עומס. בדפדפן: הדף נטען ריק ואז מחכה.`,
+    question: 'למה עדיף להביא רשימת פרויקטים בשרת?',
     options: {
-      א: 'הדף נטען מהיר יותר עם הנתונים, SEO טוב יותר, פחות עומס על הדפדפן',
-      ב: 'Client תמיד מהיר יותר',
+      א: 'הדף נטען מהיר עם הנתונים, גוגל רואה, פחות עומס על המחשב',
+      ב: 'בדפדפן תמיד מהיר יותר',
       ג: 'אין הבדל',
-      ד: 'רק בגלל SEO'
+      ד: 'רק בגלל גוגל'
     },
     correct: 'א',
-    explanation: `נכון! בשרת: טעינה ראשונית מהירה, גוגל רואה תוכן, פחות JavaScript. ב-Client: הדף נטען ריק ואז מחכה לנתונים.`
+    explanation: `נכון! בשרת: טעינה מהירה, גוגל רואה, פחות JavaScript. בדפדפן: הדף ריק קודם.`
   }
 ];

@@ -43,6 +43,9 @@ function renderPage() {
 
   if (pageNumEl) pageNumEl.textContent = `${currentPage + 1} / ${PAGES.length}`;
 
+  const progressFill = document.getElementById('progress-fill');
+  if (progressFill) progressFill.style.width = `${((currentPage + 1) / PAGES.length) * 100}%`;
+
   nextBtn.onclick = () => { if (currentPage < PAGES.length - 1) { currentPage++; renderPage(); } };
   prevBtn.onclick = () => { if (currentPage > 0) { currentPage--; renderPage(); } };
 }
