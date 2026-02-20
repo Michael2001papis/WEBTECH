@@ -10,12 +10,12 @@
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body>
-  <div class="progress-bar">
+  <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="1" aria-label="התקדמות בקורס">
     <div class="progress-fill" id="progress-fill"></div>
   </div>
   <div id="app">
     <main class="page-container">
-      <article class="content" id="content"></article>
+      <article class="content" id="content" tabindex="-1" aria-live="polite"></article>
       <footer class="footer">
         <button id="prev-btn" class="nav-btn prev-btn">→ לעמוד הקודם</button>
         <span id="page-num" class="page-num">1 / 1</span>
