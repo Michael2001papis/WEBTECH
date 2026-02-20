@@ -155,3 +155,4 @@ prevBtn.addEventListener('click', () => {
 });
 
 renderPage();
+document.body.classList.add('app-ready');
