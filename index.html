@@ -14,14 +14,54 @@
     <div class="progress-fill" id="progress-fill"></div>
   </div>
   <div id="app">
-    <main class="page-container">
-      <article class="content" id="content" tabindex="-1" aria-live="polite"></article>
-      <footer class="footer">
-        <button id="prev-btn" class="nav-btn prev-btn">→ לעמוד הקודם</button>
-        <span id="page-num" class="page-num">1 / 1</span>
-        <button id="next-btn" class="nav-btn next-btn">לעמוד הבא ←</button>
-      </footer>
-    </main>
+    <section class="hero-screen" id="hero-screen" aria-label="מסך פתיחה">
+      <div class="hero-content">
+        <h1 class="hero-title">לימודי Next.js</h1>
+        <p class="hero-subtitle">Hybrid, Server Components ו-SSR — בשפה פשוטה</p>
+        <p class="hero-desc">קורס מעשי למתחילים. לומדים שלב-אחר-שלב עם שיעורים וחידונים.</p>
+        <div class="hero-stats">
+          <span class="hero-stat"><strong id="hero-lessons">0</strong> שיעורים</span>
+          <span class="hero-stat"><strong id="hero-quizzes">0</strong> חידונים</span>
+        </div>
+        <div class="hero-actions">
+          <button type="button" class="hero-btn primary" id="hero-start">התחל ללמוד</button>
+          <button type="button" class="hero-btn secondary" id="hero-map">מפת לימוד</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="resume-overlay hidden" id="resume-overlay" role="dialog" aria-labelledby="resume-title" aria-modal="true">
+      <div class="resume-modal">
+        <h2 id="resume-title">חזרנו לשיעור האחרון שלך</h2>
+        <p class="resume-text">אפשר להמשיך מאיפה שעצרת או להתחיל מחדש.</p>
+        <div class="resume-actions">
+          <button type="button" class="hero-btn primary" id="resume-continue">המשך</button>
+          <button type="button" class="hero-btn secondary" id="resume-restart">התחל מחדש</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="map-screen hidden" id="map-screen" aria-label="מפת לימוד">
+      <div class="map-header">
+        <h2>מפת לימוד</h2>
+        <p class="map-progress" id="map-progress-text">התקדמות: 0 מתוך 0</p>
+        <button type="button" class="map-back-btn" id="map-back">חזרה</button>
+      </div>
+      <ul class="map-list" id="map-list"></ul>
+    </section>
+
+    <div class="learning-view hidden" id="learning-view">
+      <div class="progress-summary" id="progress-summary">התקדמות: 1 מתוך 24</div>
+      <main class="page-container">
+        <article class="content" id="content" tabindex="-1" aria-live="polite"></article>
+        <footer class="footer">
+          <button type="button" class="nav-btn map-link-btn" id="map-link" aria-label="פתח מפת לימוד">מפת לימוד</button>
+          <button id="prev-btn" class="nav-btn prev-btn">→ לעמוד הקודם</button>
+          <span id="page-num" class="page-num">1 / 1</span>
+          <button id="next-btn" class="nav-btn next-btn">לעמוד הבא ←</button>
+        </footer>
+      </main>
+    </div>
   </div>
   <script type="module" src="/src/main.js"></script>
 </body>
