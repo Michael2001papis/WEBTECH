@@ -1,3 +1,8 @@
+/*
+  WEBTECH – UI/UX Design and Styling
+  Developed by Michael Papismedov – 2026
+*/
+
 * {
   margin: 0;
   padding: 0;
@@ -586,6 +591,24 @@ body.app-ready .page-container {
   background: linear-gradient(90deg, var(--accent), var(--accent-light));
   border-radius: 0 0 0 3px;
   transition: width 0.3s ease;
+}
+
+/* Developer credit footer */
+.dev-credit {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.dev-credit a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.dev-credit a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 520px) {

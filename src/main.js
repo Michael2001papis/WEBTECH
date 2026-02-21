@@ -1,3 +1,9 @@
+/**
+ * WEBTECH – Application Logic
+ * Core functionality developed by Michael Papismedov
+ * Website Developer – 2026
+ */
+
 import { PAGES } from './content.js';
 
 const STORAGE_KEY = 'webtech-progress';
@@ -285,7 +291,7 @@ prevBtn.addEventListener('click', () => {
   }
 });
 
-// App entry
+// App entry – Core architecture and logic by Michael Papismedov
 const savedPage = getStoredProgress();
 
 if (savedPage !== null && savedPage > 0) {
