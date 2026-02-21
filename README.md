@@ -21,9 +21,9 @@ WEBTECH is a Single Page Application (SPA) designed to provide a structured, pro
 
 | Metric        | Count |
 |---------------|-------|
-| Lessons       | 16    |
+| Lessons       | 17    |
 | Quizzes       | 8     |
-| Total steps   | 24    |
+| Total steps   | 25    |
 
 **The system includes:**
 
@@ -54,7 +54,7 @@ WEBTECH is a Single Page Application (SPA) designed to provide a structured, pro
 
 ### 3. Learning Map
 
-- Displays all 24 course items in one view
+- Displays all 25 course items in one view
 - Status indicators:
   - **✓** Completed
   - **▶** Current
